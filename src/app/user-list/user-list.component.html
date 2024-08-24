@@ -1,0 +1,57 @@
+<div class="bg-slate-200">
+  <div class="navy-color text-white py-4">
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl font-bold">Users List</h1>
+      <input 
+      type="text" 
+      [formControl]="searchControl"
+      placeholder="Search by ID..."
+      class="text-black px-4 py-2 mt-2 w-1/2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+    </div>
+
+<div *ngIf="searchResults" [@fadeInOut] class="container mx-auto px-4 pt-8 pb-1">
+  <!-- Display search result if exists -->
+  <div class="bg-white shadow-md rounded-lg p-4 mb-4 transform transition duration-300 ease-in-out hover:scale-105 cursor-pointer">
+    <div class="flex items-center cursor-pointer hover:bg-gray-100" (click)="goToUserDetails(searchResults.id)">
+      <img [src]="searchResults.avatar" alt="{{ searchResults.first_name }}" class="w-16 h-16 rounded-full mr-4">
+      <div>
+        <p class="text-lg font-semibold">{{ searchResults.first_name }} {{ searchResults.last_name }}</p>
+        <p class="text-gray-600">{{ searchResults.email }}</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+  
+    <div class="container mx-auto px-4 py-8">
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-xl font-semibold mb-4">Users: {{totalUsers}}</h2>
+  
+        <div class="overflow-x-auto">
+          <table class="min-w-full bg-white">
+            <thead>
+              <tr>
+                <th *ngFor="let header of tableHeaders" class="text-start py-2 px-4 border-b-2 border-gray-200"> {{ header }} </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users" (click)="goToUserDetails(user.id)" class="cursor-pointer hover:bg-gray-100 transform transition duration-300 ease-in-out">
+                <td class="py-2 px-4 border-b border-gray-200">{{ user.id }}</td>
+                <td class="py-2 px-4 border-b border-gray-200">
+                  <img [src]="user.avatar" alt="{{ user.first_name }}" class="w-10 h-10 rounded-full">
+                </td>
+                <td class="py-2 px-4 border-b border-gray-200">{{ user.first_name }} {{ user.last_name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
+        <div class="mt-4 flex justify-center">
+          <nav class="flex">
+            <button (click)="prevPage()" [ngClass]="page === 1? 'opacity-20' : ''" [disabled]="page === 1" class="w-24 px-3 py-2 mx-4 navy-color text-white rounded transition duration-300 transform hover:bg-blue-700 hover:enabled:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <button (click)="nextPage()" [ngClass]="page === totalPages? 'opacity-20' : ''" [disabled]="page === totalPages" class="w-24 px-3 py-2 mx-4 navy-color text-white rounded transition duration-300 transform hover:bg-blue-700 hover:enabled:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+          </nav>
+        </div>
+      </div>
+    </div>
+</div>
