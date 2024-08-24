@@ -13,7 +13,6 @@ export class LoadingBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadingService.loading$.subscribe((loading) => {
-      debugger;
       this.loading = loading;
     });
   }
