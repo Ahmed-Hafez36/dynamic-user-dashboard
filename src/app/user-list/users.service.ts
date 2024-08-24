@@ -7,8 +7,8 @@ import { User } from './user.types';
   providedIn: 'root'
 })
 export class UsersService {
-  domain: string = 'https://reqres.in/'
-  apiUrl: string = `${this.domain}api/users`;
+  domain: string = 'https://reqres.in/'; // domain url
+  apiUrl: string = `${this.domain}api/users`; // api controller
   private cache = new Map<number, User[]>(); // Cache for users page
   private userCache = new Map<number, User>(); // Cache for individual user details
   private totalPages: number = 1;
@@ -16,6 +16,7 @@ export class UsersService {
 
   constructor(private _httpClient: HttpClient) { }
 
+  // fetch users list data with pagination
   getUsers(page: number): Observable<{ data: User[], total_pages: number, total: number }> {
     if (this.cache.has(page)) {
       // Return cached data
@@ -32,13 +33,16 @@ export class UsersService {
     }
   }
 
+  // fetch individual user data
   getUserById(id: number): Observable<User> {
     if (this.userCache.has(id)) {
+      // Return cached data
       return new Observable(observer => {
         observer.next(this.userCache.get(id) as User);
         observer.complete();
       });
     } else {
+      // Fetch data from API and cache it
       return this._httpClient.get<{ data: User }>(`${this.apiUrl}/${id}`).pipe(
         map(response => response.data),
         tap(user => this.userCache.set(id, user)),

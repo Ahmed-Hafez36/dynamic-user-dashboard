@@ -9,6 +9,7 @@ import { RouterOutlet } from '@angular/router';
   animations: [fadeInOutAnimation]
 })
 export class AppComponent {
+  // for router animation
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }

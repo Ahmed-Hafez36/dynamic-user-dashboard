@@ -1,5 +1,6 @@
 import { trigger, transition, style, animate, query } from '@angular/animations';
 
+// fade in and out animation when changing routes
 export const fadeInOutAnimation =
   trigger('routeAnimations', [
     transition('* <=> *', [

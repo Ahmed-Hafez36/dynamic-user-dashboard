@@ -38,6 +38,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule
   ],
   providers:  [
+    // intercept http request to determined when to show loading bar
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,

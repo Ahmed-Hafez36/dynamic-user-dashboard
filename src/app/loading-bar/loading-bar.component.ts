@@ -12,6 +12,7 @@ export class LoadingBarComponent implements OnInit {
   constructor(private loadingService: LoadingService) {}
 
   ngOnInit(): void {
+    // listening for show/hide trigger when http request occurs to start/stop the animation
     this.loadingService.loading$.subscribe((loading) => {
       this.loading = loading;
     });

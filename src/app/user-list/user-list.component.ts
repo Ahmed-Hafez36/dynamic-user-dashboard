@@ -11,6 +11,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
   animations: [
+    // fade in and out animation when searching by user id 
     trigger('fadeInOut', [
       transition(':enter', [
         style({ opacity: 0 }),
@@ -23,6 +24,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
   ]
 })
 export class UserListComponent implements OnInit {
+  // table headers instead of manually duplicating headers in html
   tableHeaders: string[] = ['ID', 'Avatar', 'Name'];
   users: User[] = [];
   page: number = 1;
@@ -37,7 +39,10 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Load user data on initialization of the page/component
     this.loadUsersData();
+    
+    // call api to get user data when search value change 
     this.searchControl.valueChanges
       .pipe(
         debounceTime(300), // wait for 300ms pause in events
@@ -56,11 +61,8 @@ export class UserListComponent implements OnInit {
         this.searchResults = result;
       });
   }
-  
-  userDetails(id: number): void {
-    this._router.navigate(['user-details/' + id]);
-  }
 
+  // fetching users list data
   loadUsersData(page: number = 1): void {
     this.usersService.getUsers(page).subscribe(response => {
       this.users = response.data;
@@ -70,18 +72,21 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  // next paginated data
   nextPage(): void {
     if (this.page < this.totalPages) {
       this.loadUsersData(this.page + 1);
     }
   }
 
+  // previous paginated data
   prevPage(): void {
     if (this.page > 1) {
       this.loadUsersData(this.page - 1);
     }
   }
 
+  // reroute to user details page
   goToUserDetails(userId: number): void {
     this._router.navigate(['/user-details', userId]);
   }

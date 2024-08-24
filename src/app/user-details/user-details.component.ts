@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../user-list/users.service';
-
-interface User {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  avatar: string;
-}
+import { User } from '../user-list/user.types';
 
 @Component({
   selector: 'app-user-details',
@@ -24,6 +17,7 @@ export class UserDetailsComponent implements OnInit {
     private router: Router) {}
 
   ngOnInit(): void {
+    // get user id from route params and fetching user data
     const userId = +this.route.snapshot.paramMap.get('id')!;
     this.usersService.getUserById(userId).subscribe(user => {
       console.log('response: ', user);
@@ -32,6 +26,7 @@ export class UserDetailsComponent implements OnInit {
     });
   }
 
+  // navigating back to users list
   goBack(): void {
     this.router.navigate(['/user-list']);
   }
