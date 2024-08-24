@@ -13,12 +13,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LoadingBarComponent } from './loading-bar/loading-bar.component';
 import { LoadingInterceptor } from './loading.interceptor';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserListComponent,
-    LoadingBarComponent
+    LoadingBarComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,8 @@ import { LoadingInterceptor } from './loading.interceptor';
     BrowserAnimationsModule,
     MatInputModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers:  [
