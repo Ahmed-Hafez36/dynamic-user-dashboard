@@ -8,14 +8,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './user-list/user-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import { LoadingInterceptor } from './loading.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserListComponent
+    UserListComponent,
+    LoadingBarComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,13 @@ import { MatInputModule } from '@angular/material/input';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers:  [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
