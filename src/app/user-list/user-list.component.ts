@@ -9,6 +9,7 @@ import { User } from './user.types';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit {
+  tableHeaders: string[] = ['ID', 'Avatar', 'Name'];
   users: User[] = [];
   page: number = 1;
   totalPages: number = 1;

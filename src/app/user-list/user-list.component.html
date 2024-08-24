@@ -13,10 +13,7 @@
           <table class="min-w-full bg-white">
             <thead>
               <tr>
-                <th class="text-start py-2 px-4 border-b-2 border-gray-200">ID</th>
-                <th class="text-start py-2 px-4 border-b-2 border-gray-200">Avatar</th>
-                <th class="text-start py-2 px-4 border-b-2 border-gray-200">Name</th>
-                <th class="text-start py-2 px-4 border-b-2 border-gray-200">Email</th>
+                <th *ngFor="let header of tableHeaders" class="text-start py-2 px-4 border-b-2 border-gray-200"> {{ header }} </th>
               </tr>
             </thead>
             <tbody>
@@ -26,7 +23,6 @@
                   <img [src]="user.avatar" alt="{{ user.first_name }}" class="w-10 h-10 rounded-full">
                 </td>
                 <td class="py-2 px-4 border-b border-gray-200">{{ user.first_name }} {{ user.last_name }}</td>
-                <td class="py-2 px-4 border-b border-gray-200">{{ user.email }}</td>
               </tr>
             </tbody>
           </table>
@@ -34,8 +30,8 @@
   
         <div class="mt-4 flex justify-center">
           <nav class="flex">
-            <button (click)="prevPage()" [ngClass]="page === 1? 'opacity-20' : ''" [disabled]="page === 1" class="px-3 py-2 mx-1 navy-color text-white rounded">Previous</button>
-            <button (click)="nextPage()" [ngClass]="page === totalPages? 'opacity-20' : ''" [disabled]="page === totalPages" class="px-3 py-2 mx-1 navy-color text-white rounded">Next</button>
+            <button (click)="prevPage()" [ngClass]="page === 1? 'opacity-20' : ''" [disabled]="page === 1" class="w-24 px-3 py-2 mx-4 navy-color text-white rounded">Previous</button>
+            <button (click)="nextPage()" [ngClass]="page === totalPages? 'opacity-20' : ''" [disabled]="page === totalPages" class="w-24 px-3 py-2 mx-4 navy-color text-white rounded">Next</button>
           </nav>
         </div>
       </div>
